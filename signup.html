@@ -5,8 +5,85 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        input{
+            display : block;
+        }
+    </style>
 </head>
 <body>
-    <h2>회원가입 페이지</h2>
+    <!-- <h2>회원가입 페이지</h2> -->
+    <!-- 아이디 : 5~20자의 영어 소문자와 숫자만 사용가능-->
+    아이디
+    <input type="text" id="id" onblur="id_check()">
+    <div id="id_check_result"></div>
+    비밀번호
+    <!-- 8~16자 영문 대 소문자, 숫자, 특수문자(-,_,!)를 사용하세요.-->
+    <input type="password" id="pw" onblur="pw_check()">
+    <div id="pw_check_result"></div>
+    비밀번호 재확인
+    <input type="password" onblur="pw_reaffirming()" id="pw_reaffirming">
+    <div id="pw_reaffirming_result"></div>
+    이름
+    <input type="text" id="name" onblur="name_check()">
+    <div id="name_result"></div>
+
 </body>
+<script>
+    function id_check(){
+        var id_check = document.getElementById("id").value;
+        var result = document.getElementById("id_check_result")
+        const exp = /^[a-z\d]{5,20}$/;
+        if(id_check.match(exp)){
+           result.innerHTML = "좋은 아이디 입니다"
+           result.style.color = "green"
+        }else if(id_check.length == 0){
+            result.innerHTML = "필수정보 입니다"
+            result.style.color = "red"
+        }   
+        else{
+            result.innerHTML = "5~20자의 영어 소문자와 숫자만 사용가능합니다"
+            result.style.color = "red"
+        }
+    }
+    function pw_check(){
+        var pw_check = document.getElementById("pw").value;
+        var result = document.getElementById("pw_check_result")
+        /* 8~16자 영문 대 소문자, 숫자, 특수문자(-,_,!)를 사용하세요.
+        영어 소문자 + 숫자는 필수 */
+        const exp = /^(?=.*[a-z])(?=.*\d)[a-z\dA-Z-_!]{8,16}$/;
+        if(pw_check.match(exp)){
+
+        }else if(pw_check.length == 0){
+            result.innerHTML = "필수정보 입니다"
+            result.style.color = "red"
+        }else{
+            result.innerHTML = "8~16자 영문 대 소문자, 숫자, 특수문자(-,_,!)를 사용하세요"
+            result.style.color = "red"
+        }
+    }
+    function pw_reaffirming(){
+        let password = document.getElementById("pw").value;
+        let pw_check = document.getElementById("pw_reaffirming").value;
+        let pw_reaffirming_result = document.getElementById("pw_reaffirming_result");
+        if(password == pw_check){
+            pw_reaffirming_result.innerHTML = "비밀번호가 일치합니다";
+            pw_reaffirming_result.style.color = "green";        
+        }else if(pw_check.length == 0){
+            pw_reaffirming_result.innerHTML = "필수정보입니다"
+            pw_reaffirming_result.style.color = "red";
+        }else{
+            pw_reaffirming_result.innerHTML = "비밀번호가 일치하지 않습니다"
+            pw_reaffirming_result.style.color = "red";
+        }
+    }
+    function name_check(){
+        var name_check = document.getElementById("name").value;
+        var result = document.getElementById("name_result")
+        if(id_check.length == 0){
+            result.innerHTML = "필수정보 입니다"
+            result.style.color = "red"
+        }
+    }
+</script>
 </html>
