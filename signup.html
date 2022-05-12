@@ -107,8 +107,15 @@
     function name_check(){
         var name_check = document.getElementById("name").value;
         var result = document.getElementById("name_result")
-        if(id_check.length == 0){
+        const exp = /^[a-z A-Z 가-힣]{2,16}$/;
+        if(name_check.length == 0){
             result.innerHTML = "필수정보 입니다"
+            result.style.color = "red"
+        }else if(name_check.match(exp)){
+            result.innerHTML = "완벽한 이름 입니다"
+            result.style.color = "green"
+        }else{
+            result.innerHTML = "영어와 한글만 사용 가능합니다"
             result.style.color = "red"
         }
     }
